@@ -1,5 +1,6 @@
 import { InputContainer, SearchInput, ButtonSearch } from "./styles"
 import { MagnifyingGlass } from 'phosphor-react'
+
 export const InputSearch = () => {
     return (
         <InputContainer>

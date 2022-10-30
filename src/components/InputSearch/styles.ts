@@ -1,14 +1,9 @@
 import styled from "styled-components";
 
-export const InputContainer = styled.div`
-    margin: 0 auto;
-    max-width: 1120px;
+export const InputContainer = styled.form`
     display: flex;
-    width: 100%;
-    margin-top:6.4rem;
-    padding: 1.6rem;
     gap: 1.6rem;
-    align-items: center;
+    margin: 0 auto;
 `
 
 export const SearchInput = styled.input`
