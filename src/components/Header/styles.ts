@@ -25,6 +25,7 @@ export const NewTransactionButton = styled.button`
     border-radius: 6px; 
     transition: 0.4s;
     font-weight: 700;
+    gap: 1.2rem;
 
     &:hover{
         background: ${props => props.theme["green-300"]};    }
