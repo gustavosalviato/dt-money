@@ -21,12 +21,12 @@ export const NewTransactionModal = () => (
                     <button type='submit'>Cadastrar</button>
 
                     <TransactionGrid>
-                        <TransactionTypeButton variant='income'>
+                        <TransactionTypeButton variant='income' value='income'>
                             <ArrowCircleUp size={24} />
                             Entradas
                         </TransactionTypeButton>
 
-                        <TransactionTypeButton variant='outcome'>
+                        <TransactionTypeButton variant='outcome' value='outcome'>
                             <ArrowCircleDown size={24} />
                             Saída
                         </TransactionTypeButton>
