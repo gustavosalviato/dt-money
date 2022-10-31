@@ -1,10 +1,30 @@
 import { InputContainer, SearchInput, ButtonSearch } from "./styles"
-import { MagnifyingGlass } from 'phosphor-react'
+import { CodesandboxLogo, MagnifyingGlass } from 'phosphor-react'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+
+
+const QueryFormValidationSchema = zod.object({
+    query: zod.string()
+})
+
+type SearchFormInput = zod.infer<typeof QueryFormValidationSchema>
+
 
 export const InputSearch = () => {
+
+    const { register, handleSubmit } = useForm<SearchFormInput>({
+        resolver: zodResolver(QueryFormValidationSchema)
+    })
+
+    const handleSearchTransaction = async (data: SearchFormInput) => {
+        await new Promise(resolve => setTimeout(resolve, 2000))
+        console.log(data)
+    }
     return (
-        <InputContainer>
-            <SearchInput type="text" placeholder="Busque um transação" />
+        <InputContainer onSubmit={handleSubmit(handleSearchTransaction)}>
+            <SearchInput type="text" placeholder="Busque um transação" {...register('query')} />
             <ButtonSearch>
                 <MagnifyingGlass size={20} />
                 Buscar

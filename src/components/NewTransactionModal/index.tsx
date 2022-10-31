@@ -24,11 +24,13 @@ const TransactionFormValidationSchema = zod.object({
 type TransactionFormData = zod.infer<typeof TransactionFormValidationSchema>
 
 export const NewTransactionModal = () => {
-    const { register, handleSubmit } = useForm<TransactionFormData>({
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm<TransactionFormData>({
         resolver: zodResolver(TransactionFormValidationSchema)
     })
 
-    const handleCreateNewTransaction = (data: TransactionFormData) => {
+    const handleCreateNewTransaction = async (data: TransactionFormData) => {
+        await new Promise(resolve => setTimeout(resolve, 2000))
+
         console.log(data)
     }
 
