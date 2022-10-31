@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react"
 import { Header } from "../../components/Header"
 import { InputSearch } from "../../components/InputSearch"
 import { Summary } from "../../components/Summary"
 import { useContextTrasaction } from "../../contexts/Transactions"
-import { formatPrice } from "../../helpers/formatPrice"
 import { TransactionsContainer, TableContainer, PriceHightlight } from "./styles"
-
+import { dateFormatter, formatPrice } from "../../helpers/formatPrice"
 export const Transactions = () => {
 
     const { transactions } = useContextTrasaction()
@@ -25,12 +23,12 @@ export const Transactions = () => {
                                 <td width="50%">{item.description}</td>
                                 <td>
                                     <PriceHightlight variant={item.type}>
-                                        {`R$ ${formatPrice(item.price)}`}
+                                        {formatPrice.format(item.price)}
                                     </PriceHightlight>
 
                                 </td>
                                 <td>{item.category}</td>
-                                <td>{item.createdAt}</td>
+                                <td>{dateFormatter.format(new Date(item.createdAt))}</td>
                             </tr>
                         ))}
 

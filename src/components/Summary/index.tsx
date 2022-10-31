@@ -21,6 +21,7 @@ export const Summary = () => {
         outcome: 0,
         total: 0,
     })
+
     return (
         <SummaryContainer>
             <SummaryCard>
@@ -29,7 +30,7 @@ export const Summary = () => {
                     <ArrowCircleUp size={32} color="#00B37E" />
                 </header>
 
-                <strong>R$ {formatPrice(summary.income)}</strong>
+                <strong>{formatPrice.format(summary.income)}</strong>
             </SummaryCard>
 
             <SummaryCard>
@@ -38,7 +39,7 @@ export const Summary = () => {
                     <ArrowCircleDown size={32} color="#F75A68" />
                 </header>
 
-                <strong>R$ {formatPrice(summary.outcome)}</strong>
+                <strong>{formatPrice.format((summary.outcome))}</strong>
             </SummaryCard>
 
             <SummaryCard variant="green">
@@ -47,7 +48,7 @@ export const Summary = () => {
                     <CurrencyDollar size={32} color="#FFFFFF" />
                 </header>
 
-                <strong>R$ {formatPrice(summary.total)}</strong>
+                <strong>{formatPrice.format(summary.total)}</strong>
             </SummaryCard>
         </SummaryContainer>
     )

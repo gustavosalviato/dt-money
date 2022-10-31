@@ -1,3 +1,6 @@
-export const formatPrice = (value: number) => {
-  return value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })
-}
+export const formatPrice = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+});
+
+export const dateFormatter = new Intl.DateTimeFormat('pt-BR');
