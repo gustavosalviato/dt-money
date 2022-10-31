@@ -3,6 +3,7 @@ import { CodesandboxLogo, MagnifyingGlass } from 'phosphor-react'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useContextTrasaction } from "../../contexts/Transactions"
 
 
 const QueryFormValidationSchema = zod.object({
@@ -14,13 +15,16 @@ type SearchFormInput = zod.infer<typeof QueryFormValidationSchema>
 
 export const InputSearch = () => {
 
+    const { fetchTransactions } = useContextTrasaction()
+
+
+
     const { register, handleSubmit, formState: { isSubmitting } } = useForm<SearchFormInput>({
         resolver: zodResolver(QueryFormValidationSchema)
     })
 
     const handleSearchTransaction = async (data: SearchFormInput) => {
-        await new Promise(resolve => setTimeout(resolve, 2000))
-        console.log(data)
+        await fetchTransactions(data.query)
     }
     return (
         <InputContainer onSubmit={handleSubmit(handleSearchTransaction)}>

@@ -23,6 +23,7 @@ export const Transactions = () => {
                                 <td width="50%">{item.description}</td>
                                 <td>
                                     <PriceHightlight variant={item.type}>
+                                        {item.type === 'outcome' && '- '}
                                         {formatPrice.format(item.price)}
                                     </PriceHightlight>
 
