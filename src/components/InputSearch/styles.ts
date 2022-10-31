@@ -40,9 +40,14 @@ export const ButtonSearch = styled.button`
     border: 1px solid ${props => props.theme["green-300"]};
     transition: 0.4s;
 
-    &:hover{
+    &:not(:disabled):hover{
         color: ${props => props.theme.white};
         background-color: ${props => props.theme["green-300"]};
+    }
+
+    :disabled{
+        opacity: 0.7;
+        cursor: not-allowed;
     }
 
 `

@@ -14,7 +14,7 @@ type SearchFormInput = zod.infer<typeof QueryFormValidationSchema>
 
 export const InputSearch = () => {
 
-    const { register, handleSubmit } = useForm<SearchFormInput>({
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm<SearchFormInput>({
         resolver: zodResolver(QueryFormValidationSchema)
     })
 
@@ -25,7 +25,7 @@ export const InputSearch = () => {
     return (
         <InputContainer onSubmit={handleSubmit(handleSearchTransaction)}>
             <SearchInput type="text" placeholder="Busque um transação" {...register('query')} />
-            <ButtonSearch>
+            <ButtonSearch disabled={isSubmitting}>
                 <MagnifyingGlass size={20} />
                 Buscar
             </ButtonSearch>

@@ -49,7 +49,7 @@ export const NewTransactionModal = () => {
                         <input type="number" placeholder='Preço' required  {...register('price', { valueAsNumber: true })} />
                         <input type="text" placeholder='Categoria' required {...register('category')} />
 
-                        <button type='submit'>Cadastrar</button>
+                        <button type='submit' disabled={isSubmitting}>Cadastrar</button>
 
                         <TransactionGrid>
                             <TransactionTypeButton variant='income' value='income' {...register('transactionType')} >

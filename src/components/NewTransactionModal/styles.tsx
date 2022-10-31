@@ -53,15 +53,16 @@ export const Content = styled(Dialog.Content)`
             border-radius: 6px;
             transition: 0.4s;
 
+            &:disabled{
+                opacity: 0.7;
+                cursor: not-allowed;
+            }
 
-            &:hover{
-            background-color: ${props => props.theme["green-700"]};;
-        }
-        }
-
-       
+            &:not(:disabled):hover{
+                background-color: ${props => props.theme["green-700"]};
+            }
+        }  
     }
-
 `
 
 export const Close = styled(Dialog.Close)`
@@ -85,7 +86,7 @@ interface TransactionTypeButtonProps {
     variant: 'income' | 'outcome'
 }
 
-export const TransactionTypeButton = styled(RadioGroup.Item)<TransactionTypeButtonProps>`
+export const TransactionTypeButton = styled(RadioGroup.Item) <TransactionTypeButtonProps>`
     padding: 1.6rem;
     display: flex;
     align-items: center;
