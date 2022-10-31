@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Header } from "../../components/Header"
 import { InputSearch } from "../../components/InputSearch"
 import { Summary } from "../../components/Summary"
+import { useContextTrasaction } from "../../contexts/Trasactions"
 import { formatPrice } from "../../helpers/formatPrice"
 import { TransactionsContainer, TableContainer, PriceHightlight } from "./styles"
 
@@ -16,20 +17,8 @@ interface Transaction {
 
 
 export const Transactions = () => {
-    const [transactions, setTrasactions] = useState<Transaction[]>([])
 
-    const loadTransaction = async () => {
-        const response = await fetch('http://localhost:3333/transactions')
-
-        const data = await response.json()
-
-        setTrasactions(data)
-    }
-
-    useEffect(() => {
-        loadTransaction()
-    }, [])
-
+    const { transactions } = useContextTrasaction()
     return (
         <div>
             <Header />
