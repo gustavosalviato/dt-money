@@ -1,38 +1,69 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
 import { Overlay, Content, Close, TransactionGrid, TransactionTypeButton } from './styles'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 
+enum TransactionsTypes {
+    income = 'income',
+    outcome = 'outcome'
+}
 
-export const NewTransactionModal = () => (
-    <Dialog.Portal>
-        <Overlay>
-            <Content>
-                <Dialog.Title>Nova Transação</Dialog.Title>
+const TransactionFormValidationSchema = zod.object({
+    description: zod.string().min(1),
+    price: zod.number(),
+    category: zod.string().min(1),
+    transactionType: zod.nativeEnum(TransactionsTypes, {
+        errorMap: () => {
+            return { message: 'Informe o tipo de transação' }
+        }
+    })
+})
 
-                <Close>
-                    <X size={24} />
-                </Close>
+type TransactionFormData = zod.infer<typeof TransactionFormValidationSchema>
 
-                <form action="">
-                    <input type="text" placeholder='Descrição' required />
-                    <input type="number" placeholder='Preço' required />
-                    <input type="text" placeholder='Categoria' required />
+export const NewTransactionModal = () => {
+    const { register, handleSubmit } = useForm<TransactionFormData>({
+        resolver: zodResolver(TransactionFormValidationSchema)
+    })
 
-                    <button type='submit'>Cadastrar</button>
+    const handleCreateNewTransaction = (data: TransactionFormData) => {
+        console.log(data)
+    }
 
-                    <TransactionGrid>
-                        <TransactionTypeButton variant='income' value='income'>
-                            <ArrowCircleUp size={24} />
-                            Entradas
-                        </TransactionTypeButton>
+    return (
+        <Dialog.Portal>
+            <Overlay>
+                <Content>
+                    <Dialog.Title>Nova Transação</Dialog.Title>
 
-                        <TransactionTypeButton variant='outcome' value='outcome'>
-                            <ArrowCircleDown size={24} />
-                            Saída
-                        </TransactionTypeButton>
-                    </TransactionGrid>
-                </form>
-            </Content>
-        </Overlay>
-    </Dialog.Portal>
-)
+                    <Close>
+                        <X size={24} />
+                    </Close>
+
+                    <form onSubmit={handleSubmit(handleCreateNewTransaction)}>
+                        <input type="text" placeholder='Descrição' required {...register('description')} />
+                        <input type="number" placeholder='Preço' required  {...register('price', { valueAsNumber: true })} />
+                        <input type="text" placeholder='Categoria' required {...register('category')} />
+
+                        <button type='submit'>Cadastrar</button>
+
+                        <TransactionGrid>
+                            <TransactionTypeButton variant='income' value='income' {...register('transactionType')} >
+                                <ArrowCircleUp size={24} />
+                                Entradas
+                            </TransactionTypeButton>
+
+                            <TransactionTypeButton variant='outcome' value='outcome'  {...register('transactionType')}>
+                                <ArrowCircleDown size={24} />
+                                Saída
+                            </TransactionTypeButton>
+                        </TransactionGrid>
+                    </form>
+                </Content>
+            </Overlay>
+        </Dialog.Portal >
+    )
+}
+

@@ -1,8 +1,9 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 
+
 interface Transaction {
-  id: number;
+  id: string;
   description: string;
   type: 'income' | 'outcome';
   price: number;
@@ -31,6 +32,7 @@ export const TrasanctionProvider = ({ children }: TrasanctionProviderProps) => {
 
     setTrasactions(data)
   }
+
 
   useEffect(() => {
     loadTransaction()

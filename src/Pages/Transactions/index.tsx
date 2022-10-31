@@ -2,19 +2,9 @@ import { useEffect, useState } from "react"
 import { Header } from "../../components/Header"
 import { InputSearch } from "../../components/InputSearch"
 import { Summary } from "../../components/Summary"
-import { useContextTrasaction } from "../../contexts/Trasactions"
+import { useContextTrasaction } from "../../contexts/Transactions"
 import { formatPrice } from "../../helpers/formatPrice"
 import { TransactionsContainer, TableContainer, PriceHightlight } from "./styles"
-
-interface Transaction {
-    id: number;
-    description: string;
-    type: 'income' | 'outcome';
-    price: number;
-    category: string;
-    createdAt: string;
-}
-
 
 export const Transactions = () => {
 
