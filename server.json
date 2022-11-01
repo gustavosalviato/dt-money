@@ -15,6 +15,30 @@
       "category": "Alimentação",
       "price": 50,
       "createdAt": "2022-07-29T19:30:44.505Z"
+    },
+    {
+      "category": "Transporte",
+      "description": "Passagem",
+      "price": 17,
+      "type": "income",
+      "createdAt": "2022-10-31T23:53:11.759Z",
+      "id": 3
+    },
+    {
+      "category": "Belza",
+      "description": "Colorir o cabelo",
+      "price": 90,
+      "type": "income",
+      "createdAt": "2022-10-31T23:55:09.303Z",
+      "id": 4
+    },
+    {
+      "category": "Salário",
+      "description": "Salário",
+      "price": 1800,
+      "type": "income",
+      "createdAt": "2022-10-31T23:56:02.222Z",
+      "id": 5
     }
   ]
 }
