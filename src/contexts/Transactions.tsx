@@ -1,6 +1,7 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -38,7 +39,8 @@ export const TransactionsContext = createContext({} as TransactionsContextType)
 export const TrasanctionProvider = ({ children }: TrasanctionProviderProps) => {
   const [transactions, setTrasactions] = useState<Transaction[]>([])
 
-  const fetchTransactions = async (query?: string) => {
+  const fetchTransactions = useCallback(async (query?: string) => {
+
     const response = await api.get('/transactions', {
       params: {
         _sort: 'createdAt',
@@ -48,9 +50,10 @@ export const TrasanctionProvider = ({ children }: TrasanctionProviderProps) => {
     })
 
     setTrasactions(response.data)
-  }
 
-  const addNewTransaction = async (data: newTransaction) => {
+  }, [])
+
+  const addNewTransaction = useCallback(async (data: newTransaction) => {
     const { category, description, price, type } = data
 
     const response = await api.post('/transactions', {
@@ -62,7 +65,8 @@ export const TrasanctionProvider = ({ children }: TrasanctionProviderProps) => {
     })
 
     setTrasactions((state) => [response.data, ...state])
-  }
+  }, [])
+
 
   useEffect(() => {
     fetchTransactions()
