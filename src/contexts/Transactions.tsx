@@ -70,7 +70,7 @@ export const TrasanctionProvider = ({ children }: TrasanctionProviderProps) => {
 
   useEffect(() => {
     fetchTransactions()
-  }, [])
+  }, [fetchTransactions])
 
   return (
     <TransactionsContext.Provider
